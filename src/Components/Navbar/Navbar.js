@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import doctorMini from "./DoctorMini.png";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -7,6 +8,7 @@ const Navbar = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
     const[email,setEmail]=useState("");
     const [showDropdown, setShowDropdown] = useState(false);
     const handleClick = () => setClick(!click);
@@ -37,10 +39,12 @@ const Navbar = () => {
     }
     useEffect(() => { 
       const storedemail = sessionStorage.getItem("email");
+      const storedname = sessionStorage.getItem("name");
 
       if (storedemail) {
             setIsLoggedIn(true);
-            setUsername(storedemail);
+            setUsername(storedemail)
+            setName(storedname);
           }
         }, []);
   return (
@@ -48,7 +52,7 @@ const Navbar = () => {
       <div className="nav__logo">
         <Link to="/">
         StayHealthy <i style={{color:'#2190FF'}} className="fa fa-user-md"></i></Link>
-        <span>.</span>
+        <span>{<img src={doctorMini} style={{width:"40px"}}/>}</span>
       </div>
       <div className="nav__icon" onClick={handleClick}>
         <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
@@ -58,7 +62,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="link">
-          <Link to="/search/doctors">Appointments</Link>
+          <Link to="/instant-consultation">Appointments</Link>
         </li>
         <li className="link">
           <Link to="/healthblog">Health Blog</Link>
@@ -68,6 +72,7 @@ const Navbar = () => {
         </li>
         {isLoggedIn?(
           <>
+           <li className="welcome">Welcome, {name}</li>
             <li className="link">
               <button className="btn2" onClick={handleLogout}>
                 Logout

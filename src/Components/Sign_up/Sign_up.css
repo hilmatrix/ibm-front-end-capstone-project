@@ -59,11 +59,17 @@
   .form-group {
     margin-bottom: 20px;
   }
+
+  .form-group select {
+    background-color: white;
+  }
   
   .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    width: 40%;
+    text-align: center;
   }
   
   .form-control {
@@ -89,8 +95,23 @@
   }
   
   .btn-primary {
-    background-color: #007bff;
+    /*background-color: #007bff;*/
+    background-color: green;
     color: #fff;
+  }
+
+  .btn-primary:hover {
+    background-color: darkgreen;
+  }
+
+.login-text  {
+  width: 40%;
+    text-align: center;
+}
+
+  .login-text span a{
+    /*style={{ color: '#2190FF' }}*/
+    color :green;
   }
   
   .btn-danger {

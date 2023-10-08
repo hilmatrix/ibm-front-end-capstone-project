@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 .hero-section {
-    height: 100vh;
+    height: 80%;
     padding-top: 15rem;
     background-color: transparent;
     z-index: -1;
@@ -20,7 +20,7 @@
     font-weight: 900;
 }
 .text-gradient {
-    background: linear-gradient(45deg,#2190FF 2.34%,#b673f8 100.78%);
+    background: linear-gradient(45deg,green 2.34%,#b673f8 100.78%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -36,7 +36,7 @@
 .hero-section .button {
     padding: 0.7rem 2rem;
     border-radius: 25px;
-    background-color: #2190FF;
+    background-color: green;
     color: #fff;
     border: 1px solid transparent;
     width: 15%;

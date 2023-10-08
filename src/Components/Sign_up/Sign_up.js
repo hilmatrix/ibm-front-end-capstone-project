@@ -4,6 +4,7 @@ import { API_URL } from '../../config';
 import './Sign_up.css';
 
 const Sign_up = () => {
+    const [role, setRole] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -14,14 +15,14 @@ const Sign_up = () => {
 
     const register = async (e) => {
         e.preventDefault();
-
-        // API Call
+        
         const response = await fetch(`${API_URL}/api/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                role:role,
                 name: name,
                 email: email,
                 password: password,
@@ -29,11 +30,12 @@ const Sign_up = () => {
 
             }),
         });
-
+        
         const json = await response.json();
 
         if (json.authtoken) {
             sessionStorage.setItem("auth-token", json.authtoken);
+            sessionStorage.setItem("role", role);
             sessionStorage.setItem("name", name);
             // phone and email
             sessionStorage.setItem("phone", phone);
@@ -60,28 +62,42 @@ const Sign_up = () => {
             <h2>Sign Up</h2>
           </div>
         <div className="login-text" style={{marginBottom:"20px"}}>
-            Are you already a member? <span><Link to="/login" style={{ color: '#2190FF' }}> Login Here</Link></span>
+            Are you already a member? <span><Link to="/login" > Login Here</Link></span>
           </div>
          <form method="POST" onSubmit={register}>
-           <div className="form-group">
-                <label htmlFor="email">Email</label>
-                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
-                 {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
+         <div className="form-group">
+                <label htmlFor="role">Role</label>
+                <select value={role} type="text" onChange={(e) => setRole(e.target.value)} name="select" id="select" className="form-control" placeholder="Select role" aria-describedby="helpId" >
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
             </div>
-            <div className="form-group">
+         <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" className="form-control" placeholder="Enter your name" aria-describedby="helpId" />
+                <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" 
+                className="form-control" placeholder="Enter your name" aria-describedby="helpId" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="phone">Phone</label>
-                <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" id="phone" className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" />
+                <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" id="phone" 
+                className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" 
+                maxlength="10" required/>
+            </div>
+           <div className="form-group">
+                <label htmlFor="email">Email</label>
+                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" 
+                 className="form-control" placeholder="Enter your email" aria-describedby="helpId" required/>
+                 {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} name="password" id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" 
+                id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" 
+                required/>
             </div>
             <div className="btn-group">
-                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
+                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Sign Up</button>
+                <button type="reset" class="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
               </div>
          </form>
          </div>

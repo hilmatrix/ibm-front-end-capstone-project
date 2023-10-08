@@ -8,6 +8,9 @@ const Login = () => {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,6 +21,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
+
     const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: {
@@ -35,6 +39,9 @@ const Login = () => {
       sessionStorage.setItem('auth-token', json.authtoken);
   
       sessionStorage.setItem('email', email);
+      sessionStorage.setItem('name', json.name);
+      sessionStorage.setItem('phone', json.phone);
+      setIsLoggedIn(true);
 
       navigate('/');
       window.location.reload()
@@ -57,22 +64,28 @@ const Login = () => {
             <h2>Login</h2>
           </div>
           <div className="login-text">
-            Are you a new member? <span><Link to="/signup" style={{ color: '#2190FF' }}> Sign Up Here</Link></span>
+            Are you a new member? <span><Link to="/signup"> Sign Up Here</Link></span>
           </div>
           <br />
           <div className="login-form">
             <form onSubmit={login}>
               <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
+                <label htmlFor="email">Email</label>
+                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" 
+                className="form-control" placeholder="Enter your email" aria-describedby="helpId" required/>
                     </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} name="password" id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" id="password" 
+                className="form-control" placeholder="Enter your password" aria-describedby="helpId" required/>
             </div>
               <div className="btn-group">
                 <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
+                <button type="reset" class="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
               </div>
+              <div className="login-text">
+            <span><Link to="/signup" > Forgot your password ?</Link></span>
+          </div>
             </form>
           </div>
         </div>

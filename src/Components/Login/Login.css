@@ -48,3 +48,7 @@
     color: #fff;
   }
   
+  .login-text span a{
+    /*style={{ color: '#2190FF' }}*/
+    color :green;
+  }

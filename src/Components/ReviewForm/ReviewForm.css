@@ -35,3 +35,7 @@
   .card button:disabled {
     background-color: grey;
   }
+
+  .card select {
+    background-color: white;
+  }

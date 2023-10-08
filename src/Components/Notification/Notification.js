@@ -65,6 +65,12 @@ const Notification = ({ children }) => {
               <p className="appointment-card__message">
                 <strong>Phone:</strong> {phone}
               </p>  
+              <p className="appointment-card__message">
+                <strong>Date:</strong> <input type="date" id="appointment" name="appointment" value = "2023-09-30" readOnly/>
+              </p>  
+              <p className="appointment-card__message">
+                <strong>Time:</strong> <input type="time" value="08:00" readOnly/>
+              </p>  
             </div>
           </div>
         </>

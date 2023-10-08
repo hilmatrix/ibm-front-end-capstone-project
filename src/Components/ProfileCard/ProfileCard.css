@@ -1,0 +1,15 @@
+.profileCard {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+    padding : 20px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 30%;
+    margin-top: 8%;
+    text-align: center;
+    float:right;
+  }
+  button {
+    background-color: green;
+  }

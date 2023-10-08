@@ -12,7 +12,7 @@ const Navbar = () => {
     const[email,setEmail]=useState("");
     const [showDropdown, setShowDropdown] = useState(false);
     const handleClick = () => setClick(!click);
-
+    const[profileShow,setProfileShow]=useState(false);
     
     const handleLogout = () => {
         sessionStorage.removeItem("auth-token");
@@ -47,6 +47,11 @@ const Navbar = () => {
             setName(storedname);
           }
         }, []);
+
+    const profileFunction = () => {
+      console.log("Testis");
+      setProfileShow(!profileShow)
+    }
   return (
     <nav>
       <div className="nav__logo">
@@ -72,7 +77,7 @@ const Navbar = () => {
         </li>
         {isLoggedIn?(
           <>
-           <li className="welcome">Welcome, {name}</li>
+           <li className="welcome" onClick={profileFunction}>Welcome, {name}</li>
             <li className="link">
               <button className="btn2" onClick={handleLogout}>
                 Logout

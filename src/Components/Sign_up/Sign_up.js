@@ -11,6 +11,11 @@ const Sign_up = () => {
     const [password, setPassword] = useState('');
     const [showerr, setShowerr] = useState('');
 
+    const [showEmailError, setShowEmailError] = useState('');
+    const [showNameError, setShowNameError] = useState('');
+    const [showPhoneError, setShowPhoneError] = useState('');
+    const [showPasswordError, setShowPasswordError] = useState('');
+
     const navigate = useNavigate();
 
     const register = async (e) => {
@@ -33,6 +38,10 @@ const Sign_up = () => {
         
         const json = await response.json();
 
+        console.log("Hilmatrix json.authtoken ",json.authtoken)
+        console.log("Hilmatrix json.errors ",json.errors)
+        console.log("Hilmatrix json.errors ",json.error)
+
         if (json.authtoken) {
             sessionStorage.setItem("auth-token", json.authtoken);
             sessionStorage.setItem("role", role);
@@ -48,9 +57,32 @@ const Sign_up = () => {
                 for (const error of json.errors) {
                     setShowerr(error.msg);
                 }
+            }
+            else {
+                if (Array.isArray(json.error)) {
+                    json.error.map(errorItem => {
+                        switch(errorItem.param) {
+                            case "name" : setShowNameError(errorItem.msg); break;
+                            case "email" : setShowEmailError(errorItem.msg); break;
+                            case "phone" : setShowPhoneError(errorItem.msg); break;
+                            case "password" : setShowPasswordError(errorItem.msg); break;
+                        }
+                    });
+                }
+                else {
+                    alert(json.error)
+                }
+            }
+        
+
+            /*
+            if (json.errors) {
+                for (const error of json.errors) {
+                    setShowerr(error.msg);
+                }
             } else {
                 setShowerr(json.error);
-            }
+            }*/
         }
     };
 
@@ -75,25 +107,28 @@ const Sign_up = () => {
          <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" 
-                className="form-control" placeholder="Enter your name" aria-describedby="helpId" required/>
+                className="form-control" placeholder="Enter your name" aria-describedby="helpId"/>
+                {showNameError && <div className="err" style={{ color: 'red' }}>{showNameError}</div>}
             </div>
             <div className="form-group">
                 <label htmlFor="phone">Phone</label>
                 <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" id="phone" 
                 className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" 
-                maxlength="10" required/>
+                />
+                {showPhoneError && <div className="err" style={{ color: 'red' }}>{showPhoneError}</div>}
             </div>
            <div className="form-group">
                 <label htmlFor="email">Email</label>
                  <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" 
-                 className="form-control" placeholder="Enter your email" aria-describedby="helpId" required/>
-                 {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
+                 className="form-control" placeholder="Enter your email" aria-describedby="helpId"/>
+                 {showEmailError && <div className="err" style={{ color: 'red' }}>{showEmailError}</div>}
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" 
                 id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" 
                 required/>
+                {showPasswordError && <div className="err" style={{ color: 'red' }}>{showPasswordError}</div>}
             </div>
             <div className="btn-group">
                 <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Sign Up</button>

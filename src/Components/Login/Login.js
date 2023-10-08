@@ -12,6 +12,11 @@ const Login = () => {
   const [phone, setPhone] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [showEmailError, setShowEmailError] = useState('');
+  const [showNameError, setShowNameError] = useState('');
+  const [showPhoneError, setShowPhoneError] = useState('');
+  const [showPasswordError, setShowPasswordError] = useState('');
+
   const navigate = useNavigate();
   useEffect(() => {
     if (sessionStorage.getItem("auth-token")) {
@@ -46,14 +51,26 @@ const Login = () => {
       navigate('/');
       window.location.reload()
     } else {
-      if (json.errors) {
-        for (const error of json.errors) {
-          alert(error.msg);
-        }
-      } else {
-        alert(json.error);
-      }
+          if (json.errors) {
+             for (const error of json.errors) {
+                 alert(error.msg);
+             }
+         }
+         else {
+             if (Array.isArray(json.error)) {
+                 json.error.map(errorItem => {
+                     switch(errorItem.param) {
+                         case "email" : setShowEmailError(errorItem.msg); break;
+                         case "password" : setShowPasswordError(errorItem.msg); break;
+                     }
+                 });
+             }
+             else {
+              setShowPasswordError(json.error); 
+             }
+         }
     }
+    
   };
 
   return (
@@ -72,12 +89,14 @@ const Login = () => {
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" 
-                className="form-control" placeholder="Enter your email" aria-describedby="helpId" required/>
+                className="form-control" placeholder="Enter your email" aria-describedby="helpId"/>
+                {showEmailError && <div className="err" style={{ color: 'red' }}>{showEmailError}</div>}
                     </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" id="password" 
-                className="form-control" placeholder="Enter your password" aria-describedby="helpId" required/>
+                className="form-control" placeholder="Enter your password" aria-describedby="helpId"/>
+                {showPasswordError && <div className="err" style={{ color: 'red' }}>{showPasswordError}</div>}
             </div>
               <div className="btn-group">
                 <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>

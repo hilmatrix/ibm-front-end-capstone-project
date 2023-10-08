@@ -49,8 +49,9 @@ function GiveReviews() {
                   <textarea id="review" name="review" value={formData.review} onChange={handleChange} disabled={disableForm}/>
                  </div>
                  <label htmlFor="rating">Rating</label>
-                 <select value="rating_5" type="text" name="select" id="rating" className="form-control" placeholder="Select role"  disabled={disableForm}>
-                    <option value="rating_5">5 - Awesome</option>
+                 <select value="4" type="text" name="select" id="rating" className="form-control" placeholder="Select role"  disabled={disableForm}>
+                    <option value="5">4 - Very Good</option>
+                    <option value="5">5 - Awesome</option>
                 </select>
                  <button type="submit" disabled={disableForm}>Submit</button>
 

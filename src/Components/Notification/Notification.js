@@ -7,6 +7,8 @@ const Notification = ({ children }) => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [doctorData, setDoctorData] = useState(null);
   const [appointmentData, setAppointmentData] = useState(null);
 
@@ -54,22 +56,22 @@ const Notification = ({ children }) => {
             <div className="appointment-card__content">
               <h3 className="appointment-card__title">Appointment Details</h3>
               <p className="appointment-card__message">
-                <strong>Doctor:</strong> {doctorData?.name} 
+                <strong>Doctor:</strong> {doctorData?.doctorName} 
               </p>
               <p className="appointment-card__message">
                 <strong>Speciality:</strong> {doctorData?.speciality}
               </p>
               <p className="appointment-card__message">
-                <strong>Patient:</strong> {name}
+                <strong>Patient:</strong> {doctorData?.doctorName}
               </p>  
               <p className="appointment-card__message">
                 <strong>Phone:</strong> {phone}
               </p>  
               <p className="appointment-card__message">
-                <strong>Date:</strong> <input type="date" id="appointment" name="appointment" value = "2023-09-30" readOnly/>
+                <strong>Date:</strong> <input type="date" id="appointment" name="appointment" value={doctorData?.date} readOnly/>
               </p>  
               <p className="appointment-card__message">
-                <strong>Time:</strong> <input type="time" value="08:00" readOnly/>
+                <strong>Time:</strong> <input type="time" value={doctorData?.time} readOnly/>
               </p>  
             </div>
           </div>

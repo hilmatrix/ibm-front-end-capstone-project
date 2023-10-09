@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const currentDate = new Date();
+    const [date, setDate] = useState(`${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`);
+    const [time, setTime] = useState('08:00');
+    
     const [selectedSlot, setSelectedSlot] = useState(null);
-  
+
     const handleSlotSelection = (slot) => {
       setSelectedSlot(slot);
     };
   
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      onSubmit({ name, phoneNumber });
+      onSubmit({ name, phone:phoneNumber, date, time });
       setName('');
       setPhoneNumber('');
     };
@@ -35,6 +39,26 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
             id="phoneNumber"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="date">Data:</label>
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => {console.log(e.target.value);setDate(e.target.value)}}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="time">time:</label>
+          <input
+            type="time"
+            id="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
             required
           />
         </div>

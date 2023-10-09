@@ -19,21 +19,17 @@ const FindDoctorSearchIC = () => {
         window.location.reload();
     }
 
-    const searchDoctorButton  = () => {
-        
-    }
-
     let newSpecialities = [];
     const filterSearch = (value) => {
         setSearchDoctor(value);
-        if (searchDoctor == '') {
+        if (value == '') {
             setSpecialities(initSpeciality);
             return;
         }
         
         newSpecialities = []
         initSpeciality.map((specialityItem) => {
-            if (specialityItem.toLowerCase().includes(searchDoctor.toLowerCase()))
+            if (specialityItem.toLowerCase().includes(value.toLowerCase()))
                 newSpecialities.push(specialityItem)
         });
         setSpecialities(newSpecialities);
@@ -52,7 +48,7 @@ const FindDoctorSearchIC = () => {
     return (
         <div className='finddoctor'>
             <center>
-                <h1>Find a doctor</h1>
+                <h1>Find a doctor Instantly</h1>
                 <div>               <i style={{color:'#000000',fontSize:'20rem'}} className="fa fa-user-md"></i>
 </div>                <div className="home-search-container"  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                     <div className="doctor-search-box">
@@ -60,9 +56,10 @@ const FindDoctorSearchIC = () => {
 
                         <input type="text" className="search-doctor-input-box" placeholder="Search doctors, clinics, hospitals, etc." 
                         onFocus={() => setDoctorResultHidden(false)} onBlur={() => setDoctorResultHidden(true)} 
-                        value={searchDoctor} onChange={(e) => filterSearch(e.target.value)} onKeyDown={handleKeyDown} />
+                        value={searchDoctor} onChange={(e) => filterSearch(e.target.value)} />
                         
-                        <div className="findiconimg"><img className='findIcon' src={process.env.PUBLIC_URL + '/images/search.svg'} alt="" /></div>
+                        <div className="findiconimg"><img className='findIcon' src={process.env.PUBLIC_URL + '/images/search.svg'} 
+                            onClick={() => setDoctorResultHidden(false)} alt="" /></div>
                         
                         <div className="search-doctor-input-results" hidden={doctorResultHidden}>
                             {

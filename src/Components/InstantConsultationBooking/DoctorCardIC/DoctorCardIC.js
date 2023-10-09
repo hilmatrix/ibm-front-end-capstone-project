@@ -24,7 +24,7 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
 
   const handleFormSubmit = (appointmentData) => {
     const newAppointment = {
-      id: uuidv4(),
+      id: uuidv4(), doctorName : name, speciality,
       ...appointmentData,
     };
     const updatedAppointments = [...appointments, newAppointment];
@@ -34,8 +34,8 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
     setAppointmentData(appointmentData);
 
     localStorage.setItem("doctorData", JSON.stringify(appointmentData));
-    console.log("isLoggedIn = ", isLoggedIn);
-    console.log("appointmentData = ", appointmentData);
+    
+    window.location.reload();
   };
 
   const instantBooking = () => { 
@@ -58,7 +58,7 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
           <div className="doctor-card-detail-experience">{experience} years experience</div>
           <div className="doctor-card-detail-consultationfees">Ratings: {ratings}</div>
         </div>
-        <button onClick={instantBooking}>Instant Booking</button>
+
         {/* for reference  */}
         {/* <div>
               <button className='book-appointment-btn'>                    

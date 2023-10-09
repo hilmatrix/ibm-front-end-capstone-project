@@ -24,7 +24,7 @@ const LandingPage = () => {
             <h4>
             Medical Consultation Website with Online Appointment Booking feature
             </h4>
-            <a href="#services">
+            <a href="/search/doctors">
               <button className="button">Find Doctor</button>
             </a>
         </div>

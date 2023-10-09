@@ -42,26 +42,6 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="date">Data:</label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => {console.log(e.target.value);setDate(e.target.value)}}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="time">time:</label>
-          <input
-            type="time"
-            id="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
-        </div>
         <button type="submit">Book Now</button>
       </form>
     );

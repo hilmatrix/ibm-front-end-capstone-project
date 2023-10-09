@@ -33,7 +33,7 @@ function GiveReviews() {
 
   const handleButtonClick = (data) => {
     setCurrentData (data);
-    setDisableForm(data.reviewGiven)
+    //setDisableForm(data.reviewGiven)
     console.log(formData)
     setFormData({name : data.reviewName, review : data.reviewText, rating : data.reviewRating});
     setShowForm(true);
@@ -116,8 +116,8 @@ const closeForm = () => {
                        <td>{reviewData.speciality}</td>
                        <td>{reviewData.name}</td>
                        <td>{reviewData.phone}</td>
-                       <td><button style={reviewData.reviewGiven?{backgroundColor:"darkred"}:{backgroundColor:"green"}} onClick={() => giveReview (reviewData)}>{reviewData.reviewGiven? "Open Review" : "Give Review"}</button></td>
-                       <td>{reviewData.reviewGiven?"Yes":"No"}</td>
+                       <td><button style={reviewData.reviewGiven?{backgroundColor:"grey"}:{backgroundColor:"green"}} onClick={() => giveReview (reviewData)}>{reviewData.reviewGiven? "Review Given" : "Give Review"}</button></td>
+                       <td>{reviewData.reviewGiven?reviewData.reviewText:""}</td>
                    </tr>))}
             </table>
         </div>

@@ -11,9 +11,9 @@ const FindDoctorSearch = () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-        const storedUsername = sessionStorage.getItem('email');
-        if (!storedUsername)
-            navigate(`/login`);
+        //const storedUsername = sessionStorage.getItem('email');
+        //if (!storedUsername)
+        //    navigate(`/login`);
     }, [])
     
 

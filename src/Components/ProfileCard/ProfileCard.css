@@ -9,7 +9,10 @@
     margin-top: 8%;
     text-align: center;
     float:right;
+    position: relative;
+    z-index: 2;
   }
+
   button {
     background-color: green;
   }

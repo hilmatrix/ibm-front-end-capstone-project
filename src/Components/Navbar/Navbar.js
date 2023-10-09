@@ -73,6 +73,12 @@ const Navbar = ({showProfile}) => {
           <Link to="/search/doctors">Find Doctor</Link>
         </li>
         <li className="link">
+         <Link to="/instant-consultation">Instant Consultation</Link>
+        </li>
+        <li className="link">
+         <Link to="/appointments">Appointments</Link>
+        </li>
+        <li className="link">
          <Link to="/reviews">Reviews</Link>
         </li>
         {isLoggedIn?(

@@ -1,12 +1,33 @@
+.review-form {
+    position: relative;
+    width:85%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+table {
+    width: 100%;
+    
+}
+
+table, th, td, tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: lightgray;
+}
+
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.5);
     transition: 0.3s;
     padding : 20px;
-    margin: 20px;
+    margin: auto;
+    margin-top: 20px;
     border-radius: 30px;
     width: 30%;
-    margin-top: 15rem;
     text-align: center;
   }
 

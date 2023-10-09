@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { v4 as uuidv4 } from 'uuid';
-import AppointmentFormIC from '../AppointmentFormIC/AppointmentFormIC';
-import './DoctorCardIC.css';
+import AppointmentFormIC from './AppointmentForm';
+import './DoctorCard.css';
 
 
-const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => {
+const DoctorCard = ({ name, speciality, experience, ratings, profilePic }) => {
   const [showModal, setShowModal] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [doctorData, setDoctorData] = useState(null);
@@ -94,8 +94,8 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
        <Popup
           style={{ backgroundColor: '#FFFFFF' }}
           trigger={
-            <button className={`book-appointment-btn ${appointments.length > 0 ? 'cancel-appointment' : ''}`}>
-              {appointments.length > 0 ? (
+            <button className={`book-appointment-btn ${doctorIsInAppointment() ? 'cancel-appointment' : ''}`}>
+              {doctorIsInAppointment() ? (
                 <div>Cancel Appointment</div>
               ) : (
                 <div>Book Appointment</div>
@@ -121,13 +121,13 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
                 </div>
               </div>
 
-              {appointments.length > 0 ? (
+              {doctorIsInAppointment() ? (
                 <>
                   <h3 style={{ textAlign: 'center' }}>Appointment Booked!</h3>
                   {appointments.map((appointment) => (
                     <div className="bookedInfo" key={appointment.id}>
                       <p>Name: {appointment.name}</p>
-                      <p>Phone Number: {appointment.phoneNumber}</p>
+                      <p>Phone Number: {appointment.phone}</p>
                       <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>
                     </div>
                   ))}
@@ -143,4 +143,4 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
   );
 };
 
-export default DoctorCardIC;
+export default DoctorCard;

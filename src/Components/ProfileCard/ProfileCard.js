@@ -14,9 +14,11 @@ const ProfileCard = () => {
  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
+    const storedName = sessionStorage.getItem('name')
     const storedPhone = sessionStorage.getItem('phone')
     const storedEmail = sessionStorage.getItem('email')
 
+    setName(storedName);
     setPhone(storedPhone);
     setEmail(storedEmail);
 
@@ -99,7 +101,7 @@ const handleSubmit = async (e) => {
       setEditMode(false);
       // Display success message to the user
       alert(`Profile Updated Successfully!`);
-      navigate("/");
+      window.location.reload();
     } else {
       // Handle error case
       throw new Error("Failed to update profile");
@@ -118,6 +120,7 @@ return (
   <input
     type="text"
     name="name"
+    value={name}
     onChange={(e) => setName(e.target.value)}
   />
 </label>
@@ -126,6 +129,7 @@ return (
   <input
     type="text"
     name="phone"
+    value={phone}
     onChange={(e) => setPhone(e.target.value)}
   />
 </label>

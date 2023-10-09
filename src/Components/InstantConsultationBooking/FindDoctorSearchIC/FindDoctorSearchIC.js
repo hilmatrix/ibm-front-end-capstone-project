@@ -23,6 +23,24 @@ const FindDoctorSearchIC = () => {
         
     }
 
+    let newSpecialities = [];
+    const filterSearch = (value) => {
+        setSearchDoctor(value);
+        if (searchDoctor == '') {
+            setSpecialities(initSpeciality);
+            return;
+        }
+        
+        newSpecialities = []
+        initSpeciality.map((specialityItem) => {
+            if (specialityItem.toLowerCase().includes(searchDoctor.toLowerCase()))
+                newSpecialities.push(specialityItem)
+        });
+        setSpecialities(newSpecialities);
+
+        console.log(newSpecialities);
+    }
+
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
           // 👇 Get input value
@@ -42,7 +60,7 @@ const FindDoctorSearchIC = () => {
 
                         <input type="text" className="search-doctor-input-box" placeholder="Search doctors, clinics, hospitals, etc." 
                         onFocus={() => setDoctorResultHidden(false)} onBlur={() => setDoctorResultHidden(true)} 
-                        value={searchDoctor} onChange={(e) => setSearchDoctor(e.target.value)} onKeyDown={handleKeyDown} />
+                        value={searchDoctor} onChange={(e) => filterSearch(e.target.value)} onKeyDown={handleKeyDown} />
                         
                         <div className="findiconimg"><img className='findIcon' src={process.env.PUBLIC_URL + '/images/search.svg'} alt="" /></div>
                         

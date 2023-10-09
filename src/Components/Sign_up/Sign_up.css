@@ -118,4 +118,7 @@
     background-color: #dc3545;
     color: #fff;
   }
-  
+
+  .btn-danger:hover {
+    background-color: darkred;
+  }

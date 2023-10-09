@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './InstantConsultation.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import FindDoctorSearchIC from './FindDoctorSearchIC/FindDoctorSearchIC';
 import DoctorCardIC from './DoctorCardIC/DoctorCardIC';
+import FindDoctorSearchIC from './FindDoctorSearchIC/FindDoctorSearchIC';
+import './InstantConsultation.css';
 
 const InstantConsultation = () => {
     const [searchParams] = useSearchParams();
@@ -60,7 +60,7 @@ const InstantConsultation = () => {
 
     return (
         <center>
-            <div  className="searchpage-container">
+        <div  className="searchpage-container">
             <FindDoctorSearchIC onSearch={handleSearch} />
             <div className="search-results-container">
             {isSearched ? (

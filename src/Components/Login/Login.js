@@ -103,7 +103,7 @@ const Login = () => {
                 <button type="reset" class="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
               </div>
               <div className="login-text">
-            <span><Link to="/signup" > Forgot your password ?</Link></span>
+            
           </div>
             </form>
           </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
+import ProfileCard from "../ProfileCard/ProfileCard";
 import "./Notification.css";
 
 const Notification = ({ children }) => {
@@ -11,6 +12,7 @@ const Notification = ({ children }) => {
   const [time, setTime] = useState("");
   const [doctorData, setDoctorData] = useState(null);
   const [appointmentData, setAppointmentData] = useState(null);
+  const[profileShow,setProfileShow]=useState(false);
 
 
   useEffect(() => {
@@ -46,9 +48,16 @@ const Notification = ({ children }) => {
       setAppointmentData(storedAppointmentData);
     }
   }, []);
+
+  const showProfile = () => {
+    setProfileShow(!profileShow);
+  }
+
   return (
     <div>
-      <Navbar ></Navbar>
+      <Navbar showProfile={showProfile}></Navbar>
+      {profileShow && (<ProfileCard></ProfileCard>)}
+      
       {children}
       {isLoggedIn && appointmentData && (
         <>

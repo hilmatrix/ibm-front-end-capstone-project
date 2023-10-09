@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import doctorMini from "./DoctorMini.png";
 import "./Navbar.css";
 
-const Navbar = () => {
+
+const Navbar = ({showProfile}) => {
     const [click, setClick] = useState(false);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,7 +51,9 @@ const Navbar = () => {
 
     const profileFunction = () => {
       console.log("Testis");
-      setProfileShow(!profileShow)
+      //setProfileShow(!profileShow)
+      console.log(showProfile )
+      showProfile();
     }
   return (
     <nav>

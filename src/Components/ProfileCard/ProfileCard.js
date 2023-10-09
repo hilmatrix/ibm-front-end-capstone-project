@@ -14,6 +14,12 @@ const ProfileCard = () => {
  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
+    const storedPhone = sessionStorage.getItem('phone')
+    const storedEmail = sessionStorage.getItem('email')
+
+    setPhone(storedPhone);
+    setEmail(storedEmail);
+
     const authtoken = sessionStorage.getItem("auth-token");
     if (!authtoken) {
       navigate("/login");
@@ -140,7 +146,8 @@ return (
 ) : (
 <div className="profile-details">
 <h1>Welcome, {userDetails.name}</h1>
-// implement code to display detail of phone and email like above
+<p>{`Phone : ${phone}`}</p>
+<p>{`Email : ${email}`}</p>
 <button onClick={handleEdit}>Edit</button>
 </div>
 )}

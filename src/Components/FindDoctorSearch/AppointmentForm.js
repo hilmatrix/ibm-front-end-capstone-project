@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const currentDate = new Date();
-    const [date, setDate] = useState(`${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`);
-    const [time, setTime] = useState('08:00');
+
+    const [date, setDate] = useState(`${new Date().toISOString().substring(0,10)}`);
+    const [time, setTime] = useState(new Date().toTimeString().substring(0,5));
     
     const [selectedSlot, setSelectedSlot] = useState(null);
 
@@ -23,7 +23,8 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     useEffect( () => {
       const storedName = sessionStorage.getItem('name');
       const storedPhone = sessionStorage.getItem('phone');
-
+      
+      setDate(date)
       setName(storedName);
       setPhoneNumber(storedPhone);
     });
@@ -37,7 +38,6 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            readOnly disabled
           />
         </div>
         <div className="form-group">
@@ -47,21 +47,20 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
             id="phoneNumber"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            readOnly disabled
           />
         </div>
         <div className="form-group">
-          <label htmlFor="date">Data:</label>
+          <label htmlFor="date">Date:</label>
           <input
             type="date"
             id="date"
             value={date}
-            onChange={(e) => {console.log(e.target.value);setDate(e.target.value)}}
+            onChange={(e) => {console.log(e.target.value,date);setDate(e.target.value)}}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="time">time:</label>
+          <label htmlFor="time">Time:</label>
           <input
             type="time"
             id="time"

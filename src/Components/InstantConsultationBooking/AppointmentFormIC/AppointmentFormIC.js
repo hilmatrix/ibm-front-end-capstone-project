@@ -3,9 +3,9 @@ import { useState } from 'react';
 const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const currentDate = new Date();
-    const [date, setDate] = useState(`${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`);
-    const [time, setTime] = useState('08:00');
+
+    const [date, setDate] = useState(`${new Date().toISOString().substring(0,10)}`);
+    const [time, setTime] = useState(new Date().toTimeString().substring(0,5));
     
     const [selectedSlot, setSelectedSlot] = useState(null);
 
